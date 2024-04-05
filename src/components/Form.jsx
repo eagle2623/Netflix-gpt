@@ -6,8 +6,8 @@ const Form = () => {
 		setForm(()=>!form)
 	}	
 	return (
-		<div className="absolute top-1/2 transform -translate-y-1/2  text-white w-full h-[400px] p-1 text-center flex justify-center">
-			<form action="" className="flex flex-col p-4 space-y-8 w-2/4">
+		<div className="absolute top-1/2 transform -translate-y-1/2  text-white text-center w-10/12 p-1 flex justify-center">
+			<form action="" className="flex flex-col p-4 space-y-8 w-2/4 bg-black bg-opacity-55 rounded-2xl ">
 				<p className="font-bold text-xl">{form ? `Sign in` : `Sign up`}</p>
 				{!form && (
 					<input
@@ -15,7 +15,7 @@ const Form = () => {
 						name=""
 						id=""
 						placeholder="Full name"
-						className="p-1 rounded-lg bg-slate-300 w-3/4 self-center"
+						className="p-1 rounded-lg bg-slate-300 w-96 self-center"
 					/>
 				)}
 				<input
@@ -23,18 +23,18 @@ const Form = () => {
 					name=""
 					id=""
 					placeholder="Email"
-					className="p-1 rounded-lg bg-slate-300 w-3/4 self-center"
+					className="p-1 rounded-lg bg-slate-300 w-96 self-center"
 				/>
 				<input
 					type="password"
 					name=""
 					id=""
 					placeholder="Password"
-					className="p-1 rounded-lg bg-slate-300 w-3/4 self-center"
+					className="p-1 rounded-lg bg-slate-300 w-96 self-center"
 				/>
 				<button
 					type="submit"
-					className="bg-red-600 p-1 rounded-lg w-3/4 self-center"
+					className="bg-red-600 p-1 rounded-lg w-96 self-center"
 				>
 					{form ? `Sign in` : `Sign up`}
 				</button>
