@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { formValidator } from "../utility/helper";
 
 const Form = () => {
-	const [form, setForm] = useState(false)
+	const [form, setForm] = useState(false);
+	const [error, setError] = useState();
+
+	const email = useRef();
+	const password = useRef();
 	const formHandler = () => {
-		setForm(()=>!form)
-	}	
+		setForm(!form);
+		email.current.value = "";
+		password.current.value = "";
+	};
+	const formSubmitHandler = (e) => {
+		e.preventDefault();
+		const result = formValidator(email.current.value, password.current.value);
+		setError(result);
+		email.current.value = "";
+		password.current.value = "";
+	};
 	return (
 		<div className="absolute top-1/2 transform -translate-y-1/2  text-white text-center w-10/12 p-1 flex justify-center">
-			<form action="" className="flex flex-col p-4 space-y-8 w-2/4 bg-black bg-opacity-55 rounded-2xl ">
+			<form
+				action=""
+				className="flex flex-col p-2 space-y-6 w-2/4 bg-black bg-opacity-55 rounded-2xl "
+			>
 				<p className="font-bold text-xl">{form ? `Sign in` : `Sign up`}</p>
 				{!form && (
 					<input
@@ -15,29 +32,35 @@ const Form = () => {
 						name=""
 						id=""
 						placeholder="Full name"
-						className="p-1 rounded-lg bg-slate-300 w-96 self-center"
+						className="rounded-lg bg-black p-4 w-96 self-center "
 					/>
 				)}
 				<input
+					ref={email}
 					type="email"
 					name=""
 					id=""
 					placeholder="Email"
-					className="p-1 rounded-lg bg-slate-300 w-96 self-center"
+					className="rounded-lg bg-black p-4 w-96 self-center"
 				/>
 				<input
+					ref={password}
 					type="password"
 					name=""
 					id=""
 					placeholder="Password"
-					className="p-1 rounded-lg bg-slate-300 w-96 self-center"
+					className=" rounded-lg bg-black p-4 w-96 self-center"
 				/>
 				<button
+					onClick={formSubmitHandler}
 					type="submit"
-					className="bg-red-600 p-1 rounded-lg w-96 self-center"
+					className="bg-red-600 p-4 rounded-lg w-96 self-center"
 				>
 					{form ? `Sign in` : `Sign up`}
 				</button>
+				{error && (
+					<span className="text-red-300 font-semibold">{error}</span>
+				)}
 				{!form ? (
 					<p className="font-bold text-xl">
 						Already a user ?{" "}
@@ -56,6 +79,6 @@ const Form = () => {
 			</form>
 		</div>
 	);
-}
+};
 
-export default Form
+export default Form;
