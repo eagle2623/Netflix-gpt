@@ -1,33 +1,118 @@
+/* eslint-disable no-unused-vars */
 import { useRef, useState } from "react";
-import { formValidator } from "../utility/helper";
+import { formValidator, resetFormFields } from "../utility/helper";
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+	updateProfile,
+} from "firebase/auth";
+import { auth } from "../utility/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../slices/userSlice";
 
 const Form = () => {
+	// buy default when false -> new sign up
 	const [form, setForm] = useState(false);
-	const [error, setError] = useState();
+	const [error, setError] = useState(null);
 
-	const email = useRef();
-	const password = useRef();
+	const email = useRef(null);
+	const password = useRef(null);
+	const nameValue = useRef(null);
+
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const formHandler = () => {
 		setForm(!form);
-		email.current.value = "";
-		password.current.value = "";
+		resetFormFields(email, password);
 	};
-	const formSubmitHandler = (e) => {
-		e.preventDefault();
+
+	const formSubmitHandler = () => {
 		const result = formValidator(email.current.value, password.current.value);
 		setError(result);
-		email.current.value = "";
-		password.current.value = "";
+		if (error !== null) return;
+		// sign up form
+		if (!form) {
+			createUserWithEmailAndPassword(
+				auth,
+				email.current.value,
+				password.current.value
+			)
+				.then((userCredential) => {
+					// Signed up
+					const user = userCredential.user;
+
+					// update the user
+					updateProfile(user, {
+						displayName: nameValue.current.value,
+						photoURL: "https://example.com/jane-q-user/profile.jpg",
+					})
+						.then(() => {
+							// Profile updated!
+							const { email, uid, displayName, photoURL } =
+								auth.currentUser;
+							// now add updated profile to redux store
+
+							dispatch(
+								addUser({
+									email: email,
+									uid: uid,
+									displayName: displayName,
+									photoURL: photoURL,
+								})
+							);
+							// now navigate to browse page , once logged in
+							navigate("/browse");
+						})
+						.catch((error) => {
+							setError(error);
+							console.log("Error ----->" + error);
+						});
+				})
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					setError(errorMessage);
+					console.log(errorCode + "--" + errorMessage);
+				});
+		}
+		// sign in form
+		else {
+			signInWithEmailAndPassword(
+				auth,
+				email.current.value,
+				password.current.value
+			)
+				.then((userCredential) => {
+					// Signed in
+					const user = userCredential.user;
+					console.log("signed in");
+					navigate("/browse");
+				})
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					setError(errorMessage);
+					console.log(errorCode + "--" + errorMessage);
+				});
+		}
+
+		resetFormFields(email, password);
 	};
 	return (
 		<div className="absolute top-1/2 transform -translate-y-1/2  text-white text-center w-10/12 p-1 flex justify-center">
 			<form
 				action=""
 				className="flex flex-col p-2 space-y-6 w-2/4 bg-black bg-opacity-55 rounded-2xl "
+				onSubmit={(e) => {
+					e.preventDefault();
+				}}
 			>
 				<p className="font-bold text-xl">{form ? `Sign in` : `Sign up`}</p>
 				{!form && (
 					<input
+						ref={nameValue}
 						type="text"
 						name=""
 						id=""

@@ -11,3 +11,7 @@ export const formValidator = (email, password) => {
 	}
 	return null;
 };
+export const resetFormFields = (email , password) => {
+	email.current.value = "";
+	password.current.value = "";
+}
