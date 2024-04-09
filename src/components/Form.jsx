@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { formValidator, resetFormFields } from "../utility/helper";
 import {
 	createUserWithEmailAndPassword,
@@ -10,6 +10,7 @@ import { auth } from "../utility/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../slices/userSlice";
+import loginContext from "../context/loginContext";
 
 const Form = () => {
 	// buy default when false -> new sign up
@@ -22,6 +23,8 @@ const Form = () => {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	const { updateStatus } = useContext(loginContext);
 
 	const formHandler = () => {
 		setForm(!form);
@@ -46,7 +49,7 @@ const Form = () => {
 					// update the user
 					updateProfile(user, {
 						displayName: nameValue.current.value,
-						photoURL: "https://example.com/jane-q-user/profile.jpg",
+						photoURL: "https://xsgames.co/randomusers/avatar.php?g=male",
 					})
 						.then(() => {
 							// Profile updated!
@@ -63,6 +66,8 @@ const Form = () => {
 								})
 							);
 							// now navigate to browse page , once logged in
+							updateStatus();
+							console.log(updateStatus);
 							navigate("/browse");
 						})
 						.catch((error) => {
