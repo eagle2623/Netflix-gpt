@@ -7,10 +7,8 @@ import {
 	updateProfile,
 } from "firebase/auth";
 import { auth } from "../utility/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../slices/userSlice";
-import loginContext from "../context/loginContext";
 
 const Form = () => {
 	// buy default when false -> new sign up
@@ -21,10 +19,8 @@ const Form = () => {
 	const password = useRef(null);
 	const nameValue = useRef(null);
 
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { updateStatus } = useContext(loginContext);
 
 	const formHandler = () => {
 		setForm(!form);
@@ -33,6 +29,7 @@ const Form = () => {
 
 	const formSubmitHandler = () => {
 		const result = formValidator(email.current.value, password.current.value);
+
 		setError(result);
 		if (error !== null) return;
 		// sign up form
@@ -65,10 +62,6 @@ const Form = () => {
 									photoURL: photoURL,
 								})
 							);
-							// now navigate to browse page , once logged in
-							updateStatus();
-							console.log(updateStatus);
-							navigate("/browse");
 						})
 						.catch((error) => {
 							setError(error);
@@ -93,7 +86,7 @@ const Form = () => {
 					// Signed in
 					const user = userCredential.user;
 					console.log("signed in");
-					navigate("/browse");
+					
 				})
 				.catch((error) => {
 					const errorCode = error.code;
