@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { formValidator, resetFormFields } from "../utility/helper";
 import {
 	createUserWithEmailAndPassword,

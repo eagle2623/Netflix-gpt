@@ -17,8 +17,8 @@ const router = createBrowserRouter([
 
 const App = () => {
 	const [loginStatus, setLoginStatus] = useState(false);
-	const updateStatus = () => {
-		setLoginStatus(!loginStatus);
+	const updateStatus = (status) => {
+		setLoginStatus(status);
 	};
 	return (
 		<loginContext.Provider value={{ loginStatus, updateStatus }}>

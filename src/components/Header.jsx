@@ -38,12 +38,12 @@ const Header = () => {
 						photoURL: photoURL,
 					})
 				);
-				updateStatus();
+				updateStatus(true);
 				navigate("/browse");
 			} else {
 				// User is signed out
 				dispatch(removeUser())
-				updateStatus();
+				updateStatus(false);
 				navigate("/");
 			}
 		});
