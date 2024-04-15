@@ -3,6 +3,7 @@ import loginContext from "../context/loginContext";
 import Button from "./Button";
 import { auth } from "../utility/firebase";
 import useAuthListener from "../hooks/useAuthListener";
+import { signOut } from "firebase/auth";
 
 const Header = () => {
 	const { loginStatus } = useContext(loginContext);
