@@ -18,6 +18,7 @@ const Header = () => {
 			});
 	};
 
+	// listens to any changes in auth and redirects accordingly.
 	useAuthListener();
 
 	return (
