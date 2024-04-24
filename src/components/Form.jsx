@@ -99,15 +99,17 @@ const Form = () => {
 		resetFormFields(email, password);
 	};
 	return (
-		<div className="absolute top-1/2 transform -translate-y-1/2  text-white text-center w-10/12 p-1 flex justify-center">
+		<div className="  p-6 bg-gradient-to-b from-gray-950 to-transparent opacity-90">
 			<form
 				action=""
-				className="flex flex-col p-2 space-y-6 w-2/4 bg-black bg-opacity-55 rounded-2xl "
+				className="flex flex-col items-center space-y-4"
 				onSubmit={(e) => {
 					e.preventDefault();
 				}}
 			>
-				<p className="font-bold text-xl">{form ? `Sign in` : `Sign up`}</p>
+				<h1 className="text-[2rem] font-bold text-gray-100 w-full text-left ">
+					{form ? `Sign-in` : `Sign-up`}
+				</h1>
 				{!form && (
 					<input
 						ref={nameValue}
@@ -115,7 +117,7 @@ const Form = () => {
 						name=""
 						id=""
 						placeholder="Full name"
-						className="rounded-lg bg-black p-4 w-96 self-center "
+						className="text-lg rounded-sm bg-black p-5 w-96 self-center "
 					/>
 				)}
 				<input
@@ -124,7 +126,7 @@ const Form = () => {
 					name=""
 					id=""
 					placeholder="Email"
-					className="rounded-lg bg-black p-4 w-96 self-center"
+					className="text-lg rounded-sm bg-black p-5 w-96 self-center "
 				/>
 				<input
 					ref={password}
@@ -132,12 +134,12 @@ const Form = () => {
 					name=""
 					id=""
 					placeholder="Password"
-					className=" rounded-lg bg-black p-4 w-96 self-center"
+					className="text-lg rounded-sm bg-black p-5 w-96 self-center "
 				/>
 				<button
 					onClick={formSubmitHandler}
 					type="submit"
-					className="bg-red-600 p-4 rounded-lg w-96 self-center"
+					className="bg-red-600 p-6 rounded-sm w-96 self-center text-gray-100 font-bold text-2xl"
 				>
 					{form ? `Sign in` : `Sign up`}
 				</button>
@@ -145,14 +147,14 @@ const Form = () => {
 					<span className="text-red-300 font-semibold">{error}</span>
 				)}
 				{!form ? (
-					<p className="font-bold text-xl">
+					<p className="font-bold text-xl text-gray-100">
 						Already a user ?{" "}
 						<span className="hover:cursor-pointer" onClick={formHandler}>
 							Sign in
 						</span>
 					</p>
 				) : (
-					<p className="font-bold text-xl">
+					<p className="font-bold text-xl text-gray-100">
 						New user ?{" "}
 						<span className="hover:cursor-pointer" onClick={formHandler}>
 							Sign up

@@ -3,7 +3,7 @@ import Header from "../components/Header";
 
 const LoginPage = () => {
 	return (
-		<div className="">
+		<div className="h-screen overflow-hidden">
 			<Header />
 			<Body />
 		</div>
