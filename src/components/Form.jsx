@@ -99,7 +99,7 @@ const Form = () => {
 		resetFormFields(email, password);
 	};
 	return (
-		<div className="  p-6 bg-gradient-to-b from-gray-950 to-transparent opacity-90">
+		<div className="  p-6 z-0">
 			<form
 				action=""
 				className="flex flex-col items-center space-y-4"
@@ -117,7 +117,7 @@ const Form = () => {
 						name=""
 						id=""
 						placeholder="Full name"
-						className="text-lg rounded-sm bg-black p-5 w-96 self-center "
+						className="text-white text-lg rounded-sm bg-black p-5 w-96 self-center "
 					/>
 				)}
 				<input
@@ -126,7 +126,7 @@ const Form = () => {
 					name=""
 					id=""
 					placeholder="Email"
-					className="text-lg rounded-sm bg-black p-5 w-96 self-center "
+					className="text-white text-lg rounded-sm bg-black p-5 w-96 self-center "
 				/>
 				<input
 					ref={password}
@@ -134,7 +134,7 @@ const Form = () => {
 					name=""
 					id=""
 					placeholder="Password"
-					className="text-lg rounded-sm bg-black p-5 w-96 self-center "
+					className="text-white text-lg rounded-sm bg-black p-5 w-96 self-center "
 				/>
 				<button
 					onClick={formSubmitHandler}

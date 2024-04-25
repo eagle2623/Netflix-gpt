@@ -15,8 +15,9 @@ const useNowPlayingMovies = () => {
 			
 			dispatch(addNowPlayingMovies(data?.results));
 			
-			// random trielr on each mount
-			dispatch(addVideoObj(data?.results[getRandomNumber(0,19)]));
+			// add random video obj to store and treat it as trailer, on each mount
+			dispatch(addVideoObj(data?.results[getRandomNumber(0, 19)]));
+			console.log(data?.results[getRandomNumber(0, 19)]);
 			
 		};
 		useState(() => {

@@ -1,8 +1,11 @@
 import React from 'react'
 
+
 const SecondaryVideoContainer = () => {
   return (
-    <div>SecondaryVideoContainer</div>
+    <div className='text-white'>
+   
+    </div>
   )
 }
 

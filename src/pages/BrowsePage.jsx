@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import LoginHeader from "../components/LoginHeader";
 import MainVideoContainer from "../components/MainVideoContainer";
 import SecondaryVideoContainer from "../components/SecondaryVideoContainer";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
@@ -10,12 +11,11 @@ const BrowsePage = () => {
 	useNowPlayingMovies()
 
 	return (
-		<div>
-			<>
-				<Header />
-				<MainVideoContainer/>
-				<SecondaryVideoContainer/>
-			</>
+		<div className="bg-gradient-to-b from-black to-gray-950 opacity-85 w-screen">
+			<Header />
+			<MainVideoContainer />
+
+			<SecondaryVideoContainer />
 		</div>
 	);
 };
