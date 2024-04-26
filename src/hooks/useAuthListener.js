@@ -12,7 +12,7 @@ const useAuthListener = () => {
     const {  updateStatus } = useContext(loginContext);
     
     	useEffect(() => {
-			onAuthStateChanged(auth, (user) => {
+		const unsubscribe =	onAuthStateChanged(auth, (user) => {
 				if (user) {
 					// User is signed in
 					const { email, uid, displayName, photoURL } = user;
@@ -32,9 +32,13 @@ const useAuthListener = () => {
 					// User is signed out
 					dispatch(removeUser());
 					updateStatus(false);
-					navigate("/");
+					
+					
+						navigate("/");
+					
 				}
-			});
+		});
+			return ()=>unsubscribe()	
 		}, []);
 }
 export default useAuthListener;
