@@ -10,7 +10,7 @@ const MainVideoContainer = () => {
 	const { id, title, overview } = selector?.videoObj;
 
 	return (
-		<div className="h-screen flex flex-col w-screen bg-gradient-to-r from-black ">
+		<div className="h-screen flex flex-col w-screen bg-gradient-to-r from-black no-scrollbar">
 			<MovieTrailer trailerId={id} />
 
 			<MovieDetails title={title} overview={overview} />

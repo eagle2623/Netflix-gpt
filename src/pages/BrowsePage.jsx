@@ -11,10 +11,9 @@ const BrowsePage = () => {
 	useNowPlayingMovies()
 
 	return (
-		<div className="bg-gradient-to-b from-black to-gray-950 opacity-85 w-screen">
+		<div className="bg-gradient-to-b from-black to-gray-950 opacity-85 w-screen no-scrollbar">
 			<Header />
 			<MainVideoContainer />
-
 			<SecondaryVideoContainer />
 		</div>
 	);
