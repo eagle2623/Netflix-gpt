@@ -4,9 +4,11 @@ import Button from "./Button";
 import { auth } from "../utility/firebase";
 import useAuthListener from "../hooks/useAuthListener";
 import { signOut } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-	const { loginStatus } = useContext(loginContext);
+	// const { loginStatus } = useContext(loginContext);
+	const formStatus = useSelector(state => state?.user?.formStatus)
 
 	const logoutHandler = () => {
 		signOut(auth)
@@ -30,7 +32,7 @@ const Header = () => {
 					className="h-20 "
 				/>
 
-				{loginStatus && (
+				{formStatus && (
 					<Button text={"Logout"} functionality={logoutHandler} />
 				)}
 			</div>

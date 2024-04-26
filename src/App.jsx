@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import BrowsePage from "./pages/BrowsePage";
 import loginContext from "./context/loginContext";
-import { useState } from "react";
+
 
 const router = createBrowserRouter([
 	{
@@ -16,14 +16,11 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-	const [loginStatus, setLoginStatus] = useState(false);
-	const updateStatus = (status) => {
-		setLoginStatus(status);
-	};
+
 	return (
-		<loginContext.Provider value={{ loginStatus, updateStatus }}>
+		
 			<RouterProvider router={router} />
-		</loginContext.Provider>
+		
 	);
 };
 
