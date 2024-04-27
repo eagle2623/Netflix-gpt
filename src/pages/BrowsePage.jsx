@@ -1,5 +1,4 @@
 import Header from "../components/Header";
-import LoginHeader from "../components/LoginHeader";
 import MainVideoContainer from "../components/MainVideoContainer";
 import SecondaryVideoContainer from "../components/SecondaryVideoContainer";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";

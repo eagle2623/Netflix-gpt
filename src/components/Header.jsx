@@ -1,16 +1,18 @@
-import { useContext, useEffect } from "react";
-import loginContext from "../context/loginContext";
+
 import Button from "./Button";
 import { auth } from "../utility/firebase";
 import useAuthListener from "../hooks/useAuthListener";
 import { signOut } from "firebase/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFormStatus } from "../slices/userSlice";
 
 const Header = () => {
-	// const { loginStatus } = useContext(loginContext);
-	const formStatus = useSelector(state => state?.user?.formStatus)
+	const formStatus = useSelector(store => store?.user?.formStatus)
+	const dispatch = useDispatch()
 
 	const logoutHandler = () => {
+		dispatch(updateFormStatus(false));
+
 		signOut(auth)
 			.then(() => {
 				// Sign-out successful.

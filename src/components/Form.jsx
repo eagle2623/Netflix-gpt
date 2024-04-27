@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utility/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../slices/userSlice";
+import { addUser, updateFormStatus } from "../slices/userSlice";
 
 const Form = () => {
 	// buy default when false -> new sign up
@@ -42,6 +42,7 @@ const Form = () => {
 				.then((userCredential) => {
 					// Signed up
 					const user = userCredential.user;
+					
 
 					// update the user
 					updateProfile(user, {
@@ -65,14 +66,14 @@ const Form = () => {
 						})
 						.catch((error) => {
 							setError(error);
-							console.log("Error ----->" + error);
+							
 						});
 				})
 				.catch((error) => {
 					const errorCode = error.code;
 					const errorMessage = error.message;
 					setError(errorMessage);
-					console.log(errorCode + "--" + errorMessage);
+				
 				});
 		}
 		// sign in form
@@ -85,14 +86,14 @@ const Form = () => {
 				.then((userCredential) => {
 					// Signed in
 					const user = userCredential.user;
-					console.log("signed in");
+					
+					
 					
 				})
 				.catch((error) => {
 					const errorCode = error.code;
 					const errorMessage = error.message;
 					setError(errorMessage);
-					console.log(errorCode + "--" + errorMessage);
 				});
 		}
 

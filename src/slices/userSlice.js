@@ -3,9 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
     name: 'userSlice',
-    initialState: {
-        formStatus:false
-    },
+    initialState: {},
     reducers: {
         addUser: (state, action) => {
             return  action.payload
@@ -14,7 +12,7 @@ const userSlice = createSlice({
            return  null
         },
         updateFormStatus: (state, action) => {
-            return action.payload
+           state.formStatus = action.payload
         }
     }
 })
