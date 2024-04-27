@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-const Button = ({ text, functionality }) => {
+const Button = ({ text, functionality,color }) => {
 	return (
 		<div>
 			<button
-				className="w-28 bg-red-600 p-4 rounded-xl font-bold"
+				className={`p-4 rounded-xl font-bold ${color}`}
 				onClick={() => functionality()}
 			>
 				{text}

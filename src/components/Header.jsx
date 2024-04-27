@@ -35,7 +35,14 @@ const Header = () => {
 				/>
 
 				{formStatus && (
-					<Button text={"Logout"} functionality={logoutHandler} />
+					<div className="flex items-center space-x-2 ">
+						<Button text={'GPT-suggestion'} color={'bg-purple-500'}/>
+						<Button
+							text={"Logout"}
+							functionality={logoutHandler}
+							color={"bg-red-600"}
+						/>
+					</div>
 				)}
 			</div>
 		</div>
