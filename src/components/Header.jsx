@@ -1,14 +1,17 @@
-
 import Button from "./Button";
 import { auth } from "../utility/firebase";
 import useAuthListener from "../hooks/useAuthListener";
 import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFormStatus } from "../slices/userSlice";
+import { toggleGptSuggestionStatus } from "../slices/appSlice";
 
 const Header = () => {
-	const formStatus = useSelector(store => store?.user?.formStatus)
-	const dispatch = useDispatch()
+	const formStatus = useSelector((store) => store?.user?.formStatus);
+		const gptSuggestionStatus = useSelector(
+			(store) => store?.appConfig?.gptStatus
+		);
+	const dispatch = useDispatch();
 
 	const logoutHandler = () => {
 		dispatch(updateFormStatus(false));
@@ -20,6 +23,9 @@ const Header = () => {
 			.catch((error) => {
 				// An error happened.
 			});
+	};
+	const gptSuggestionToggleHandler = () => {
+		dispatch(toggleGptSuggestionStatus());
 	};
 
 	// listens to any changes in auth and redirects accordingly.
@@ -36,7 +42,11 @@ const Header = () => {
 
 				{formStatus && (
 					<div className="flex items-center space-x-2 ">
-						<Button text={'GPT-suggestion'} color={'bg-purple-500'}/>
+						<Button
+							text={gptSuggestionStatus ? "Homepage" :"GPT-suggestion"}
+							functionality={gptSuggestionToggleHandler}
+							color={"bg-purple-500"}
+						/>
 						<Button
 							text={"Logout"}
 							functionality={logoutHandler}
