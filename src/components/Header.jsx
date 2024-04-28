@@ -5,6 +5,7 @@ import { signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFormStatus } from "../slices/userSlice";
 import { toggleGptSuggestionStatus } from "../slices/appSlice";
+import LanguageDropdown from "./LanguageDropdown";
 
 const Header = () => {
 	const formStatus = useSelector((store) => store?.user?.formStatus);
@@ -15,6 +16,8 @@ const Header = () => {
 
 	const logoutHandler = () => {
 		dispatch(updateFormStatus(false));
+		// have to dispatch it here also because if we dont do it then when we logout , after that status of gptStatus remains true and on re login user lands on gptPage instead of homepage
+		dispatch(toggleGptSuggestionStatus());
 
 		signOut(auth)
 			.then(() => {
@@ -25,6 +28,7 @@ const Header = () => {
 			});
 	};
 	const gptSuggestionToggleHandler = () => {
+
 		dispatch(toggleGptSuggestionStatus());
 	};
 
@@ -42,6 +46,7 @@ const Header = () => {
 
 				{formStatus && (
 					<div className="flex items-center space-x-2 ">
+						{gptSuggestionStatus && <LanguageDropdown/>}
 						<Button
 							text={gptSuggestionStatus ? "Homepage" :"GPT-suggestion"}
 							functionality={gptSuggestionToggleHandler}
